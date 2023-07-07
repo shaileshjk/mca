@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title th:text="#{book.list.headline}" />
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 th:text="#{book.list.headline}" class="flex-grow-1" />
+                <div>
+                    <a th:href="@{/books/add}" th:text="#{book.list.createNew}" class="btn btn-primary ms-2" />
+                </div>
+            </div>
+            <div th:if="${books.empty}" th:text="#{book.list.empty}" />
+            <div th:if="${!books.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th th:text="#{book.id.label}" scope="col" />
+                            <th th:text="#{book.name.label}" scope="col" />
+                            <th th:text="#{book.author.label}" scope="col" />
+                            <th th:text="#{book.price.label}" scope="col" />
+                            <th th:text="#{book.publication.label}" scope="col" />
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="book : ${books}">
+                            <td th:text="${book.id}" />
+                            <td th:text="${book.name}" />
+                            <td th:text="${book.author}" />
+                            <td th:text="${book.price}" />
+                            <td th:text="${book.publication}" />
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/books/edit/{id}(id=${book.id})}" th:text="#{book.list.edit}" class="btn btn-sm btn-info" />
+                                    <form th:action="@{/books/delete/{id}(id=${book.id})}"
+                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
+                                        <button th:text="#{book.list.delete}" type="submit" class="btn btn-sm btn-danger" />
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
