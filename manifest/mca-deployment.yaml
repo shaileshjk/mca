@@ -14,7 +14,7 @@ spec:
         app: mca
     spec:
       containers:
-      - image: ghcr.io/shaileshjk/mca:sha256-bb1ce6e018ea06ed19e997602ec651acf8e14145d0663ed2d90ea044370cef2e.sig
+      - image: springcommunity/spring-framework-petclinic:latest
         name: mca
         ports:
         - containerPort: 8080
